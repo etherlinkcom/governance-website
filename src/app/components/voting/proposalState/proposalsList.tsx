@@ -39,7 +39,7 @@ export const ProposalList = ({ proposals, winnerCandidate, periodIndex }: Propos
             <span className={`break-all ${appTheme.disabledTextColor}`}>
               (by <LinkPure className="underline" href={context.explorer.getAccountUrl(p.proposer)} target="_blank">{p.proposer}</LinkPure>)
             </span>
-            <InformationLink cycle={periodIndex} />
+            <InformationLink payloadKey={p.key} />
           </div>
           <div className="flex flex-row sm:flex-col gap-1">
             <span>Upvotes:</span>

@@ -24,7 +24,7 @@ export const PromotionState = ({ contractAddress, promotionPeriod, config }: Pro
       {promotionPeriod.winnerCandidate && <div className="flex flex-col">
         <span>Candidate:</span>
         <PayloadKey value={promotionPeriod.winnerCandidate} />
-        <InformationLink cycle={promotionPeriod.index} />
+        <InformationLink payloadKey={promotionPeriod.winnerCandidate} />
       </div>}
 
       <div className="flex flex-col gap-4">

@@ -1,27 +1,25 @@
+import { PayloadKey } from '@/lib/governance';
 import styles from "./informationLink.module.css";
 
 // Data about proposals and links to information about them
 import { allLinkData } from "@/data/proposals";
 
 interface InformationLinkProps {
-  cycle: number,
+  payloadKey: PayloadKey,
 }
 
-export const InformationLink = ({ cycle }: InformationLinkProps) => {
-
-  // Get currently selected governance contract via parsing the URL.
-  // There is probably a better way to do this but I couldn't find the type of governance from the contract.
-  const currentUrl = window.location.href;
-  const currentPeriodType = currentUrl.split('/').find((subPath) => ['kernel', 'security'].includes(subPath));
-
-  const linkData = allLinkData.find(({ cycles, periodType }) => cycles.includes(cycle) && periodType === currentPeriodType);
-
+export const InformationLink: React.FC<InformationLinkProps> = ({
+  payloadKey
+}) => {
+  const linkData = allLinkData.find((d) => JSON.stringify(d.payloadKey) === JSON.stringify(payloadKey));
+  
   if (!linkData) {
-    return <></>;
+    return null;
   }
 
   return <div>
-    <a className={styles.externalLink} href={linkData.href} target="_blank">{linkData.title}
+    <a className={styles.externalLink} href={linkData.href} target="_blank">
+      {linkData.title}
     </a>
   </div>
 }
