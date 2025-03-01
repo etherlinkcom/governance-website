@@ -7,11 +7,10 @@ import { useState } from 'react'
 
 interface ProposalListProps {
   proposals: Proposal[];
-  periodIndex: number;
   winnerCandidate: NonNullable<PayloadKeyType> | null;
 }
 
-export const ProposalList = ({ proposals, winnerCandidate, periodIndex }: ProposalListProps) => {
+export const ProposalList = ({ proposals, winnerCandidate }: ProposalListProps) => {
   const [showAll, setShowAll] = useState(false);
   const handleShowAllClick = () => {
     setShowAll((v) => !v);

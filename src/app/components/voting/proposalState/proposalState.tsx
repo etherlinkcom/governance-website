@@ -25,7 +25,7 @@ export const ProposalState = ({ contractAddress, proposalPeriod, config }: Propo
       <h2 className="text-xl">Proposals</h2>
       <ProgressPure text="Quorum" value={proposalQuorum} target={minimumProposalQuorum} />
     </div>
-    <ProposalList proposals={proposalPeriod.proposals} winnerCandidate={proposalPeriod.winnerCandidate} periodIndex={proposalPeriod.index} />
+    <ProposalList proposals={proposalPeriod.proposals} winnerCandidate={proposalPeriod.winnerCandidate} />
 
     <h2 className="text-xl mb-2">Upvoters</h2>
     <UpvotersTable
