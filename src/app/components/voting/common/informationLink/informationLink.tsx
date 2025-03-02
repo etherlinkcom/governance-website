@@ -3,6 +3,7 @@ import styles from "./informationLink.module.css";
 
 // Data about proposals and links to information about them
 import { allLinkData } from "@/data/proposals";
+import equal from 'fast-deep-equal';
 
 interface InformationLinkProps {
   payloadKey: PayloadKey,
@@ -11,7 +12,7 @@ interface InformationLinkProps {
 export const InformationLink: React.FC<InformationLinkProps> = ({
   payloadKey
 }) => {
-  const linkData = allLinkData.find((d) => JSON.stringify(d.payloadKey) === JSON.stringify(payloadKey));
+  const linkData = allLinkData.find((d) => equal(d.payloadKey, payloadKey));
   
   if (!linkData) {
     return null;
