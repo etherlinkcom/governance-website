@@ -8,9 +8,11 @@ import { useState } from 'react'
 interface ProposalListProps {
   proposals: Proposal[];
   winnerCandidate: NonNullable<PayloadKeyType> | null;
+  contractAddress: string,
+  period: "promotion" | "proposal",
 }
 
-export const ProposalList = ({ proposals, winnerCandidate }: ProposalListProps) => {
+export const ProposalList = ({ proposals, winnerCandidate, contractAddress, period }: ProposalListProps) => {
   const [showAll, setShowAll] = useState(false);
   const handleShowAllClick = () => {
     setShowAll((v) => !v);
@@ -38,7 +40,7 @@ export const ProposalList = ({ proposals, winnerCandidate }: ProposalListProps) 
             <span className={`break-all ${appTheme.disabledTextColor}`}>
               (by <LinkPure className="underline" href={context.explorer.getAccountUrl(p.proposer)} target="_blank">{p.proposer}</LinkPure>)
             </span>
-            <InformationLink payloadKey={p.key} />
+            <InformationLink payloadKey={p.key} contractAddress={contractAddress} period={period}/>
           </div>
           <div className="flex flex-row sm:flex-col gap-1">
             <span>Upvotes:</span>
