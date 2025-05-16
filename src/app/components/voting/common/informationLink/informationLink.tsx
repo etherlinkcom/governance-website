@@ -1,5 +1,6 @@
 import { PayloadKey } from '@/lib/governance';
 import { LinkPure } from '@/app/components';
+import { InlineCopy } from '@/app/components';
 import styles from "./informationLink.module.css";
 
 // Data about proposals and links to information about them
@@ -35,7 +36,7 @@ export const InformationLink: React.FC<InformationLinkProps> = ({
     </LinkPure>
     <div>
       <div>Run this command to upvote the proposal:</div>
-      <div className={styles.command}>{command}</div>
+      <InlineCopy code={command} />
     </div>
   </>
 
