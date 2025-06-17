@@ -8,3 +8,5 @@ export { Loader, LoaderPure } from './loader';
 export { SpinIcon } from './spinIcon';
 export { ClientContextProvider, useClientContext } from './clientContext';
 export { NetworkSelector, NetworkSelectorPure } from './networkSelector';
+export { InlineCopy } from './inlineCopy';
+export { CopyButton } from './copyButton';
