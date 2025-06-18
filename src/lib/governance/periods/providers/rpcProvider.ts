@@ -63,7 +63,7 @@ export class RpcGovernancePeriodsProvider implements GovernancePeriodsProvider {
         endLevel,
         startTime,
         endTime,
-        type: index % 2 === 0 ? PeriodType.Proposal : PeriodType.Promotion,
+        type: PeriodType.Proposal,
         winnerPayload: null,
       });
     }
