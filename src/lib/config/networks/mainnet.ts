@@ -7,14 +7,15 @@ export const mainnetConfig: BaseConfig = {
   rpcUrl: 'https://rpc.tzkt.io/mainnet',
   tzktApiUrl: 'https://api.tzkt.io',
   tzktExplorerUrl: 'https://tzkt.io',
+  // All contracts below are for Dyonisus
   contracts: [{
-    address: 'KT1FPG4NApqTJjwvmhWvqA14m5PJxu9qgpBK',
+    address: 'KT1XdSAYGXrUDE1U5GNqUKKscLWrMhzyjNeh',
     name: 'slow'
   }, {
-    address: 'KT1GRAN26ni19mgd6xpL6tsH52LNnhKSQzP2',
+    address: 'KT1D1fRgZVdjTj5sUZKcSTPPnuR7LRxVYnDL',
     name: 'fast'
   }, {
-    address: 'KT1UvCsnXpLAssgeJmrbQ6qr3eFkYXxsTG9U',
+    address: 'KT1NnH9DCAoY1pfPNvb9cw9XPKQnHAFYFHXa',
     name: 'sequencer'
   }]
 };
