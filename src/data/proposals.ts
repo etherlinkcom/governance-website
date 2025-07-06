@@ -24,4 +24,9 @@ export const allLinkData: LinkData[] = [
     href: 'https://medium.com/etherlink/announcing-bifr%C3%B6st-a-2nd-upgrade-proposal-for-etherlink-mainnet-ef1a7cf9715f',
     title: 'Announcing Bifröst: a 2nd upgrade proposal for Etherlink Mainnet',
   },
+  {
+    payloadKey: '0001010d789e7cccc25c785cf73a658574ed0995ef36b8416a46ab0ddc6b058b39',
+    href: 'https://forum.tezosagora.org/t/tezos-bakers-it-s-time-to-vote-for-etherlink-4-1-dionysus-revision-1/6810',
+    title: 'Tezos bakers, it’s time to vote for Etherlink 4.1 (Dionysus Revision 1)!',
+  },
 ];
