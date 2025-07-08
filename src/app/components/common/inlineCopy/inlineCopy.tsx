@@ -1,14 +1,14 @@
 import React from 'react';
-import styles from "./inlineCopy.module.css";
 
 import { CopyButton } from '../copyButton';
 
 interface InlineCopyProps {
+  text: string,
   code: string,
 };
 
-export const InlineCopy = ({ code }: InlineCopyProps) =>
-  <div className={styles.container}>
-    <code className={styles.command}>{code}</code>
+export const InlineCopy = ({ text, code }: InlineCopyProps) =>
+  <div className="flex mt-2">
+    <div>{text}</div>
     <CopyButton code={code} />
   </div>;

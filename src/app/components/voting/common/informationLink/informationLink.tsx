@@ -1,7 +1,6 @@
 import { PayloadKey } from '@/lib/governance';
 import { LinkPure } from '@/app/components';
 import { InlineCopy } from '@/app/components';
-import styles from "./informationLink.module.css";
 
 // Data about proposals and links to information about them
 import { allLinkData } from "@/data/proposals";
@@ -28,15 +27,15 @@ export const InformationLink: React.FC<InformationLinkProps> = ({
 
   const promotionPeriodCommand = `octez-client transfer 0 from my_wallet to ${contractAddress} --entrypoint "vote" --arg '"yea"'`;
 
-  const command = equal(period, "proposal") ? proposalPeriodCommand : promotionPeriodCommand;
+  const command = period === 'proposal' ? proposalPeriodCommand : promotionPeriodCommand;
+  const text = period === 'proposal' ? 'Copy command to upvote proposal' : 'Copy command to vote on promotion';
 
   return <>
     <LinkPure className="underline text-gray-400" href={linkData.href} target="_blank">
       {linkData.title}
     </LinkPure>
     <div>
-      <div>Run this command to upvote the proposal:</div>
-      <InlineCopy code={command} />
+      <InlineCopy text={text} code={command} />
     </div>
   </>
 
