@@ -43,7 +43,7 @@ export function CopyButton({ code }: CopyButtonProps) {
         </span>
         <span
           className={`
-            absolute inset-0 flex items-center justify-center -mt-1
+            absolute inset-0 flex items-center justify-center -mt-2
             transition-opacity duration-300 ease-in-out
             ${isCopied ? 'opacity-100' : 'opacity-0'}
           `}
