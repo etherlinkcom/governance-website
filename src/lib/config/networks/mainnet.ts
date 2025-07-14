@@ -9,13 +9,13 @@ export const mainnetConfig: BaseConfig = {
   tzktExplorerUrl: 'https://tzkt.io',
   // All contracts below are for Dyonisus
   contracts: [{
-    address: 'KT1XdSAYGXrUDE1U5GNqUKKscLWrMhzyjNeh',
+    address: 'KT1VZVNCNnhUp7s15d9RsdycP7C1iwYhAQ8r',
     name: 'slow'
   }, {
-    address: 'KT1D1fRgZVdjTj5sUZKcSTPPnuR7LRxVYnDL',
+    address: 'KT1DxndcFitAbxLdJCN3C1pPivqbC3RJxD1R',
     name: 'fast'
   }, {
-    address: 'KT1NnH9DCAoY1pfPNvb9cw9XPKQnHAFYFHXa',
+    address: 'KT1WckZ2uiLfHCfQyNp1mtqeRcC1X6Jg2Qzf',
     name: 'sequencer'
   }]
 };
