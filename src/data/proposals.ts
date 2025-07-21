@@ -10,6 +10,14 @@ interface LinkData {
 
 export const allLinkData: LinkData[] = [
   {
+    payloadKey: {
+        poolAddress: "3b1885eec759c22c878e12c84fac33b3b9d153e4",
+        sequencerPublicKey: "p2pk64mGSmsRAuodTdyNMJdSC6SmtWHF3gXH1WmmpPY8hyTqYFfd4Bg"
+      },
+    href: 'https://forum.tezosagora.org/t/tezos-bakers-the-second-etherlink-governance-vote-is-here-it-s-time-to-vote-for-the-sequencer-upgrade/6818',
+    title: 'Tezos bakers, the second Etherlink governance vote is here — it’s time to vote for the Sequencer Upgrade',
+  },
+  {
     payloadKey: '0008105ea6fb0e4331d7bbc93f0e8843ae91eeb235741054cb2b345ac2d19b9ec9',
     href: 'https://medium.com/@etherlink/announcing-dionysus-the-next-etherlink-upgrade-proposal-4601c6920709',
     title: 'Announcing Dionysus: The Next Etherlink Upgrade Proposal',
