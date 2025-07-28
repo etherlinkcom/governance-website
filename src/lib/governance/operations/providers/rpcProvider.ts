@@ -50,7 +50,10 @@ export class RpcGovernanceOperationsProvider implements GovernanceOperationsProv
     ])
     const bakersMap = new Map(bakers.map(b => [b.address, b]));
 
-    return operations.map(o => {
+    return operations
+      // Filter out operations that did not come from a baker
+      .filter(({ sender }) => bakersMap.has(sender.address))
+      .map(o => {
       const baker = bakersMap.get(o.sender.address);
 
       return {
