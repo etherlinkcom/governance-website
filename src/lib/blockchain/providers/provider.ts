@@ -12,4 +12,6 @@ export interface BlockchainProvider {
   getContractOriginationLevel(address: string): Promise<number>;
   getVotingFinishedEvents(address: string): Promise<VotingFinishedEventPayloadDto[]>;
   getContractOperations(address: string, entrypoints: string[], startLevel: number, endLevel: number): Promise<ContractOperation[]>;
+  getVotingPowerForAddress(address: string, level: number): Promise<number>;
+  getGlobalVotingPeriodIndex(start_level: number, end_level: number): Promise<number>;
 }

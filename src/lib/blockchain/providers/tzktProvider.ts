@@ -146,6 +146,33 @@ export class TzktProvider implements BlockchainProvider {
     return this.fetchJson(url, { select: 'key,value' });
   }
 
+  async getVotingPowerForAddress(address: string, global_voting_index: number): Promise<number> {
+    try {
+        let voting_power = 0;
+        const url = `${this.baseUrl}/voting/periods/${global_voting_index}/voters/${address}`
+        const data = await this.fetchJson<{ delegate: { address: string }; votingPower: number }>(url);
+
+        if (!data) return voting_power;
+        if (!data.votingPower) throw new Error(`No voting power found for address ${address} at global_voting_index ${global_voting_index}`);
+        return data.votingPower;
+    } catch (error) {
+        return 0;
+    }
+  }
+
+  async getGlobalVotingPeriodIndex(start_level: number, end_level: number): Promise<number> {
+      const url = `${this.baseUrl}/v1/voting/periods`;
+      const data = await this.fetchJson<{ index: number }[]>(
+          url,
+          { 'firstLevel.le': String(start_level), 'lastLevel.ge': String(end_level) }
+      );
+      if (!data || data.length === 0) throw new Error(`No voting period found for start level ${start_level} and end level ${end_level}`);
+      if (data.length > 1) {
+        console.warn(`Multiple voting periods found for start level ${start_level} and end level ${end_level}, returning the first one`);
+      }
+      return data[0].index;
+  }
+
   protected async fetchAllChunks<T>(url: string, limit: number, params?: Record<string, string>): Promise<T[]> {
     let offset = 0;
     let chunk: T[] = [];
@@ -158,17 +185,44 @@ export class TzktProvider implements BlockchainProvider {
     return result;
   }
 
-  protected async fetchJson<T>(
+ protected async fetchJson<T>(
     endpoint: string,
     params?: Record<string, string>,
-    fetchParams: RequestInit = { cache: 'no-store' }
-  ): Promise<T> {
-    //TODO: improve
+    fetchParams: RequestInit = { cache: 'no-store' },
+    maxRetries: number = 5,
+    baseDelayMs: number = 1000
+): Promise<T> {
     let url = endpoint;
-    if (params)
-      url = `${url}?${new URLSearchParams(params).toString()}`;
+    if (params) {
+        url = `${url}?${new URLSearchParams(params).toString()}`;
+    }
 
-    const res = await fetch(url, fetchParams);
-    return await res.json() as T;
-  }
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+        try {
+            const res = await fetch(url, fetchParams);
+
+            if (res.ok) {
+                return await res.json() as T;
+            } else if (res.status === 429 && attempt < maxRetries) {
+                const delay = baseDelayMs * Math.pow(2, attempt);
+                await new Promise(resolve => setTimeout(resolve, delay));
+                continue;
+            } else {
+                const errorBody = await res.text();
+                throw new Error(`HTTP Error ${res.status}: ${res.statusText || 'Unknown Error'} - ${errorBody.substring(0, 200)}`);
+            }
+        } catch (error) {
+            if ((error instanceof TypeError || (error instanceof Error && (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')))) && attempt < maxRetries) {
+                const delay = baseDelayMs * Math.pow(2, attempt);
+                await new Promise(resolve => setTimeout(resolve, delay));
+                continue;
+            } else if (error instanceof Error && error.message.includes('blocks')) {
+                throw error;
+            } else {
+                throw error;
+            }
+        }
+    }
+    throw new Error(`Failed to fetch ${url} after ${maxRetries} attempts.`);
+}
 }
